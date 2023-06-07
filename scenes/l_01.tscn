@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcc218gh31gsh"]
+
+[ext_resource type="PackedScene" uid="uid://b2ln4xeer6gow" path="res://objects/player.tscn" id="1_rpxp2"]
+[ext_resource type="PackedScene" uid="uid://bdstkkb1ehhkv" path="res://objects/walls.tscn" id="2_7j28e"]
+[ext_resource type="PackedScene" uid="uid://bypdv6ia18bul" path="res://objects/ball.tscn" id="3_red5e"]
+
+[node name="L01" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0670945, 0.131813, 0.208088, 1)
+
+[node name="Walls" parent="." instance=ExtResource("2_7j28e")]
+position = Vector2(960, 540)
+
+[node name="PlayerRight" parent="." instance=ExtResource("1_rpxp2")]
+position = Vector2(1856, 256)
+motion_mode = 1
+side = 1
+
+[node name="PlayerLeft" parent="." instance=ExtResource("1_rpxp2")]
+position = Vector2(64, 256)
+
+[node name="Ball" parent="." instance=ExtResource("3_red5e")]
+position = Vector2(960, 540)

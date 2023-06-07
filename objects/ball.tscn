@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bypdv6ia18bul"]
+
+[ext_resource type="Texture2D" uid="uid://70kelu0mwhdv" path="res://assets/gfx/ball.png" id="1_52vpb"]
+
+[node name="Ball" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_52vpb")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+region_filter_clip_enabled = true
