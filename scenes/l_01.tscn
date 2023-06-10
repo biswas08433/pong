@@ -1,32 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcc218gh31gsh"]
+[gd_scene load_steps=10 format=3 uid="uid://bcc218gh31gsh"]
 
+[ext_resource type="Script" path="res://scenes/l_01.gd" id="1_8iixe"]
+[ext_resource type="FontFile" uid="uid://dxad5sca2ta67" path="res://assets/fonts/EvilEmpire-4BBVK.ttf" id="1_asoj7"]
+[ext_resource type="Texture2D" uid="uid://0e1ekaxe8x7e" path="res://assets/gfx/partition.png" id="1_fwrmh"]
 [ext_resource type="PackedScene" uid="uid://b2ln4xeer6gow" path="res://objects/player.tscn" id="1_rpxp2"]
 [ext_resource type="PackedScene" uid="uid://bdstkkb1ehhkv" path="res://objects/walls.tscn" id="2_7j28e"]
+[ext_resource type="Theme" uid="uid://crgygvwyyv1fm" path="res://def_theme.tres" id="3_g4gsj"]
+[ext_resource type="Script" path="res://scenes/ScoreContainer.gd" id="3_oponq"]
 [ext_resource type="PackedScene" uid="uid://bypdv6ia18bul" path="res://objects/ball.tscn" id="3_red5e"]
 
+[sub_resource type="Theme" id="Theme_7u60k"]
+default_font = ExtResource("1_asoj7")
+default_font_size = 256
+
 [node name="L01" type="Node2D"]
+z_index = -1
+script = ExtResource("1_8iixe")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
+[node name="bg" type="CanvasLayer" parent="."]
+layer = -2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="bg"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0670945, 0.131813, 0.208088, 1)
+color = Color(0.0666667, 0.133333, 0.207843, 1)
+
+[node name="ScoreContainer" type="HBoxContainer" parent="bg"]
+modulate = Color(1, 1, 1, 0.196078)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7u60k")
+theme_override_constants/separation = 256
+script = ExtResource("3_oponq")
+
+[node name="LeftScore" type="Label" parent="bg/ScoreContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightScore" type="Label" parent="bg/ScoreContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReadyPrompt" type="Label" parent="bg"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 64.0
+offset_right = 252.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme = ExtResource("3_g4gsj")
+theme_override_font_sizes/font_size = 64
+text = "Press ENTER to START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Partition" type="Sprite2D" parent="bg"]
+self_modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(960, 540)
+texture = ExtResource("1_fwrmh")
+metadata/_edit_lock_ = true
 
 [node name="Walls" parent="." instance=ExtResource("2_7j28e")]
 position = Vector2(960, 540)
 
 [node name="PlayerRight" parent="." instance=ExtResource("1_rpxp2")]
-position = Vector2(1856, 256)
+position = Vector2(1888, 540)
 motion_mode = 1
+reset_position = Vector2(1888, 540)
 side = 1
 
 [node name="PlayerLeft" parent="." instance=ExtResource("1_rpxp2")]
-position = Vector2(64, 256)
+position = Vector2(32, 540)
+reset_position = Vector2(32, 540)
 
 [node name="Ball" parent="." instance=ExtResource("3_red5e")]
 position = Vector2(960, 540)
+
+[connection signal="score_changed" from="Ball" to="." method="_on_ball_score_changed"]

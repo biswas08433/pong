@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dxad5sca2ta67"
-path="res://.godot/imported/EvilEmpire-4BBVK.ttf-8fef6b584293ac0beb1c442f753b3191.fontdata"
+path="res://.godot/imported/EvilEmpire-4BBVK.ttf-e04682af1c914561e49c4792e5109ae4.fontdata"
 
 [deps]
 
-source_file="res://assets/EvilEmpire-4BBVK.ttf"
-dest_files=["res://.godot/imported/EvilEmpire-4BBVK.ttf-8fef6b584293ac0beb1c442f753b3191.fontdata"]
+source_file="res://assets/fonts/EvilEmpire-4BBVK.ttf"
+dest_files=["res://.godot/imported/EvilEmpire-4BBVK.ttf-e04682af1c914561e49c4792e5109ae4.fontdata"]
 
 [params]
 

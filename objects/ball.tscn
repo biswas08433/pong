@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bypdv6ia18bul"]
+[gd_scene load_steps=5 format=3 uid="uid://bypdv6ia18bul"]
 
 [ext_resource type="Texture2D" uid="uid://70kelu0mwhdv" path="res://assets/gfx/ball.png" id="1_52vpb"]
+[ext_resource type="Script" path="res://objects/ball.gd" id="1_w4cpr"]
+[ext_resource type="Script" path="res://objects/SoundPlayer.gd" id="4_23c2b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xd6h0"]
+size = Vector2(40, 40)
 
 [node name="Ball" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_w4cpr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_52vpb")
-region_enabled = true
-region_rect = Rect2(0, 0, 48, 48)
-region_filter_clip_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_xd6h0")
+
+[node name="SoundPlayer" type="Node" parent="."]
+script = ExtResource("4_23c2b")

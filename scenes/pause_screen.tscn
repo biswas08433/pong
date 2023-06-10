@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyogu0uymp2yh"]
+
+[ext_resource type="Shader" uid="uid://1mqrmn0n1mr5" path="res://shaders/screen_blur.tres" id="1_o65qu"]
+[ext_resource type="Theme" uid="uid://crgygvwyyv1fm" path="res://def_theme.tres" id="2_xhxow"]
+[ext_resource type="Texture2D" uid="uid://2smqhppqncnr" path="res://assets/gfx/sheet_white1x.png" id="3_dybip"]
+[ext_resource type="Script" path="res://scenes/pause_screen.gd" id="3_yprhn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gredt"]
+shader = ExtResource("1_o65qu")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5iju"]
+atlas = ExtResource("3_dybip")
+region = Rect2(200, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnqap"]
+atlas = ExtResource("3_dybip")
+region = Rect2(400, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34x21"]
+atlas = ExtResource("3_dybip")
+region = Rect2(200, 100, 50, 50)
+
+[node name="PauseScreen" type="ColorRect"]
+material = SubResource("ShaderMaterial_gredt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -210.0
+offset_right = 540.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(1500, 750)
+theme = ExtResource("2_xhxow")
+script = ExtResource("3_yprhn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.0
+offset_top = -270.0
+offset_right = 661.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.0
+offset_top = -270.0
+offset_right = 661.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 64
+
+[node name="HelpText" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Left Paddle Up/Down - W/S
+Right Paddle Up/Down - UpArrow/DownArrow
+
+First one to reach 10 points win
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseText" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 128
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="RestartButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+icon = SubResource("AtlasTexture_f5iju")
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+icon = SubResource("AtlasTexture_nnqap")
+
+[node name="HelpButton" type="TextureButton" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_34x21")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HelpButton" to="." method="_on_help_button_pressed"]

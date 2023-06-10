@@ -1,11 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0kbwo3gbctcn"]
+[gd_scene load_steps=9 format=3 uid="uid://d0kbwo3gbctcn"]
 
 [ext_resource type="Theme" uid="uid://crgygvwyyv1fm" path="res://def_theme.tres" id="1_uqgcu"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="2_cqppc"]
 [ext_resource type="Texture2D" uid="uid://2smqhppqncnr" path="res://assets/gfx/sheet_white1x.png" id="2_o3x1o"]
+[ext_resource type="Shader" uid="uid://1mqrmn0n1mr5" path="res://shaders/screen_blur.tres" id="4_epjiy"]
+[ext_resource type="AudioStream" uid="uid://d4nkjpu7rtmap" path="res://assets/sfx/general/start_button_sfx.mp3" id="5_up25u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1fac8"]
 atlas = ExtResource("2_o3x1o")
 region = Rect2(200, 100, 50, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxvmf"]
+shader = ExtResource("4_epjiy")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jg04y"]
+atlas = ExtResource("2_o3x1o")
+region = Rect2(400, 400, 50, 50)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_uqgcu")
+script = ExtResource("2_cqppc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -67,7 +78,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Quit"
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="HelpButton" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -78,3 +89,53 @@ offset_right = -25.0
 offset_bottom = 75.0001
 grow_horizontal = 0
 texture_normal = SubResource("AtlasTexture_1fac8")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qxvmf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 540)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -651.0
+offset_top = -385.0
+offset_right = 651.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect2/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Left Paddle Up/Down - W/S
+Right Paddle Up/Down - UpArrow/DownArrow
+
+First one to reach 10 points win
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HelpCrossButton" type="TextureButton" parent="ColorRect2/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = SubResource("AtlasTexture_jg04y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_up25u")
+
+[connection signal="pressed" from="HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="ColorRect2/PanelContainer/HelpCrossButton" to="." method="_on_help_cross_button_pressed"]

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://crgygvwyyv1fm"]
 
-[ext_resource type="FontFile" uid="uid://dxad5sca2ta67" path="res://assets/EvilEmpire-4BBVK.ttf" id="1_cpdea"]
+[ext_resource type="FontFile" uid="uid://dxad5sca2ta67" path="res://assets/fonts/EvilEmpire-4BBVK.ttf" id="1_cpdea"]
 
 [resource]
 default_font = ExtResource("1_cpdea")

@@ -12,7 +12,7 @@ size = Vector2(32, 1080)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfahq"]
 size = Vector2(32, 1080)
 
-[node name="Walls" type="StaticBody2D"]
+[node name="Walls" type="StaticBody2D" groups=["wall"]]
 
 [node name="UpWallCol" type="CollisionShape2D" parent="."]
 position = Vector2(0, -556)
